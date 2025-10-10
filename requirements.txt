@@ -1,0 +1,4 @@
+from-root:1.3.0
+pymongo:4.15.3
+
+-e .
