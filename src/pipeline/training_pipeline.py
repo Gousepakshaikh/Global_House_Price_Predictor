@@ -3,14 +3,17 @@ from src.logger import logging
 from src.exception import MyException
 
 from src.components.data_ingestion import DataIngestion
+from src.components.data_validation import DataValidation
 
 
 
-from src.entity.config_entity import DataIngestionConfig
+from src.entity.config_entity import (DataIngestionConfig,
+                                      DataValidationConfig)
 
 
 
-from src.entity.artifact_entity import DataIngestionArtifact
+from src.entity.artifact_entity import (DataIngestionArtifact,
+                                        DataValidationArtifact)
 
 
 
@@ -18,9 +21,10 @@ from src.entity.artifact_entity import DataIngestionArtifact
 class TrainPipeline:
     def __init__(self):
         self.data_ingestion_config=DataIngestionConfig()
+        self.data_validation_config=DataValidationConfig()
 
     
-    def start_data_ingetion(self):
+    def start_data_ingetion(self)->DataIngestionArtifact:
         """
         this method is responsible for starting data ingestion component of training pipeline
         """
@@ -33,6 +37,20 @@ class TrainPipeline:
         except Exception as e:
             raise MyException(e,sys)
         
+    def start_data_validation(self,data_ingestion_artifact:DataIngestionArtifact)->DataValidationArtifact:
+        """
+        this method is responsible for starting data validation component of training pipeline
+        """
+        try:
+            logging.info("Training pipeline data-validation component is started")
+            data_validation=DataValidation(data_ingestion_artifact=data_ingestion_artifact,
+                                           data_validation_config=self.data_validation_config)
+            data_validation_artifact=data_validation.initiate_data_validation()
+            logging.info('Data-Validation component finished execution Successfully')
+        except Exception as e:
+            raise MyException(e,sys)
+
+
     
     def run_pipeline(self):
         """
@@ -40,6 +58,7 @@ class TrainPipeline:
         """
         try:
             data_ingestion_artifact=self.start_data_ingetion()
+            data_validation_artiifact=self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact)
 
 
         except Exception as e:

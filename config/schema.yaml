@@ -1,0 +1,101 @@
+columns:
+  - property_id: int
+  - country: category
+  - city: category
+  - property_type: category
+  - furnishing_status: category
+  - property_size_sqft: int
+  - price: int
+  - constructed_year: int
+  - previous_owners: int
+  - rooms: int
+  - bathrooms: int
+  - garage: int
+  - garden: int
+  - crime_cases_reported: int
+  - legal_cases_on_property: int
+  - customer_salary: int
+  - loan_amount: int
+  - loan_tenure_years: int
+  - monthly_expenses: int
+  - down_payment: int
+  - emi_to_income_ratio: float
+  - satisfaction_score: int
+  - neighbourhood_rating: int
+  - connectivity_score: int
+  - decision: int
+
+numerical_columns:
+  - property_size_sqft
+  - price
+  - constructed_year
+  - previous_owners
+  - rooms
+  - bathrooms
+  - garage
+  - garden
+  - crime_cases_reported
+  - legal_cases_on_property
+  - customer_salary
+  - loan_amount
+  - loan_tenure_years
+  - monthly_expenses
+  - down_payment
+  - emi_to_income_ratio
+  - satisfaction_score
+  - neighbourhood_rating
+  - connectivity_score
+  - decision
+
+categorical_columns:
+  - country
+  - city
+  - property_type
+  - furnishing_status
+
+drop_columns:
+  - property_id
+  - down_payment
+  - emi_to_income_ratio
+  - decision
+  - loan_amount
+  - loan_tenure_years
+  - customer_salary
+  - city
+  - crime_cases_reported
+  - constructed_year
+  - garage
+  - satisfaction_score
+  - legal_cases_on_property
+  - connectivity_score
+
+# For data transformation
+num_features:
+  - property_size_sqft
+  - price
+  - constructed_year
+  - previous_owners
+  - rooms
+  - bathrooms
+  - garage
+  - garden
+  - crime_cases_reported
+  - legal_cases_on_property
+  - customer_salary
+  - loan_amount
+  - loan_tenure_years
+  - monthly_expenses
+  - down_payment
+  - emi_to_income_ratio
+  - satisfaction_score
+  - neighbourhood_rating
+  - connectivity_score
+  - decision
+
+mm_columns:
+  - price
+  - customer_salary
+  - loan_amount
+  - monthly_expenses
+  - down_payment
+  - emi_to_income_ratio
