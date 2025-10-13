@@ -70,32 +70,7 @@ drop_columns:
   - connectivity_score
 
 # For data transformation
-num_features:
-  - property_size_sqft
-  - price
-  - constructed_year
-  - previous_owners
-  - rooms
-  - bathrooms
-  - garage
-  - garden
-  - crime_cases_reported
-  - legal_cases_on_property
-  - customer_salary
-  - loan_amount
-  - loan_tenure_years
-  - monthly_expenses
-  - down_payment
-  - emi_to_income_ratio
-  - satisfaction_score
-  - neighbourhood_rating
-  - connectivity_score
-  - decision
-
-mm_columns:
-  - price
-  - customer_salary
-  - loan_amount
-  - monthly_expenses
-  - down_payment
-  - emi_to_income_ratio
+ohe_features:
+  - country
+  - property_type
+  - furnishing_status
