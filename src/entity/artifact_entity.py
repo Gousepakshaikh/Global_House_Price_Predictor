@@ -17,7 +17,17 @@ class DataTransformationArtifact:
     transformed_train_file_path:str
     transformed_test_file_path:str
 
-    
+@dataclass
+class RegressionMetricsArtifact:
+    MAE:float
+    RMSE:float
+    R2_SCORE:float
+    MAPE:float
+
+@dataclass
+class ModelTrainerArtifact:
+    trained_model_file_path:str
+    metrics_artifact:RegressionMetricsArtifact
 
 
     
