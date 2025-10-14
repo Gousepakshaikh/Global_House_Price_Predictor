@@ -20,7 +20,7 @@ class DataTransformationArtifact:
 @dataclass
 class RegressionMetricsArtifact:
     MAE:float
-    RMSE:float
+    MSE:float
     R2_SCORE:float
     MAPE:float
 

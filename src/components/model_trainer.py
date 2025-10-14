@@ -7,8 +7,9 @@ from typing import Tuple
 from src.logger import logging
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import r2_score,mean_absolute_error,mean_squared_error,mean_absolute_percentage_error
-from src.utils.main_utils import load_numpy_array_data,load_object,save_object
+from src.utils.main_utils import load_numpy_array_data,load_object,save_object,write_yaml_file
 from src.entity.estimator import MyModel
+import os
 
 
 class ModelTrainer:
@@ -39,18 +40,27 @@ class ModelTrainer:
             #predictions and evaluation metrics
             y_pred=model.predict(x_test)
             MAE=mean_absolute_error(y_test,y_pred)
-            RMSE=np.sqrt(mean_squared_error(y_test,y_pred))
+            MSE=mean_squared_error(y_test,y_pred)
             R2_SCORE=r2_score(y_test,y_pred)
             MAPE=mean_absolute_percentage_error(y_test,y_pred)
 
+            # saving metrics in model.yaml file
+            metrics = {
+                        "MODEL_NAME": type(model).__name__,
+                        "MAE": float(MAE),
+                        "MSE": float(MSE),
+                        "R2SCORE": float(R2_SCORE),
+                        "MAPE": float(MAPE)
+                    }
+
             #creating metric artifact
             metrics_artifact=RegressionMetricsArtifact(MAE=MAE,
-                                                       RMSE=RMSE,
+                                                       MSE=MSE,
                                                        R2_SCORE=R2_SCORE,
                                                        MAPE=MAPE)
 
 
-            return model,metrics_artifact
+            return model,metrics_artifact,metrics
         except Exception as e:
             raise MyException(e,sys) from e
         
@@ -63,7 +73,7 @@ class ModelTrainer:
             test_arr=load_numpy_array_data(self.data_transformation_artifact.transformed_test_file_path)
             logging.info("train and test_data loaded")
 
-            trained_model,metrics_artifact=self.get_model_object_and_report(train=train_arr,test=test_arr)
+            trained_model,metrics_artifact,metrics=self.get_model_object_and_report(train=train_arr,test=test_arr)
             logging.info("trained_model and metrics artifact loaded")
 
             # load_preprocessing object 
@@ -78,7 +88,13 @@ class ModelTrainer:
             logging.info("saving the model as performance is better than previous one")
             my_model=MyModel(preprocessing_object=preprocessing_object,trained_model_object=trained_model)
             save_object(self.model_trainer_config.trained_model_file_path,my_model)
+
             logging.info("Saved final model object that includes both preprocessing and the trained model")
+            path_dir=os.path.dirname(self.model_trainer_config.model_config_file_path)
+            os.makedirs(path_dir,exist_ok=True)
+            write_yaml_file(file_path=self.model_trainer_config.model_config_file_path,content=metrics,
+                            replace=self.model_trainer_config.model_config_replace)
+            logging.info("model.yaml file created and saved model name and metrics")
 
             model_trainer_artifact=ModelTrainerArtifact(trained_model_file_path=self.model_trainer_config.trained_model_file_path,
                                                         metrics_artifact=metrics_artifact)

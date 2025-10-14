@@ -39,4 +39,6 @@ class ModelTrainerConfig:
     model_trainer_dir:str=os.path.join(training_pipeline_config.artifact_dir,MODEL_TRAINER_DIR_NAME)
     trained_model_file_path:str=os.path.join(model_trainer_dir,MODEL_TRAINER_TRAINED_MODEL_DIR,MODEL_TRAINER_TRAINED_MODEL_NAME)
     model_trainer_expected_score:float=0.6
+    model_config_file_path:str=MODEL_TRAINER_MODEL_CONFIG_FILE_PATH
+    model_config_replace:bool=MODEL_TRAINER_MODEL_CONFIG_REPLACE
 
