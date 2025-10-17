@@ -36,6 +36,10 @@ class ModelEvaluationArtifact:
     s3_model_path:str
     trained_model_path:str
 
+@dataclass
+class ModelPusherArtifact:
+    bucket_name:str
+    s3_model_path:str
 
 
 
