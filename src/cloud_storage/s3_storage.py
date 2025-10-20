@@ -67,7 +67,7 @@ class SimpleStorageService:
 
         try:
             bucket=self.get_bucket(bucket_name=bucket_name)
-            file_objects=[file_object for file_object in bucket.objects.filter(prefix=filename)]
+            file_objects=[file_object for file_object in bucket.objects.filter(Prefix=filename)]
             return file_objects[0] if len(file_objects)==1 else file_objects
         except Exception as e:
             raise MyException(e,sys)

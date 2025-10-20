@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>House Price Prediction</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Global House Price Predictor</h1>
+
+        <form action="/" method="post">
+            <label for="Country">Country</label>
+            <select id="Country" name="Country" required>
+                <option value="">Select Country</option>
+                <option value="China">China</option>
+                <option value="Canada">Canada</option>
+                <option value="USA">USA</option>
+                <option value="France">France</option>
+                <option value="Singapore">Singapore</option>
+                <option value="Australia">Australia</option>
+                <option value="South Africa">South Africa</option>
+                <option value="Japan">Japan</option>
+                <option value="Brazil">Brazil</option>
+                <option value="India">India</option>
+                <option value="UAE">UAE</option>
+                <option value="UK">UK</option>
+                <option value="Germany">Germany</option>
+            </select>
+
+            <label for="Property_Type">Property_Type</label>
+            <select id="Property_Type" name="Property_Type" required>
+                <option value="">Select Property Type</option>
+                <option value="Apartment">Apartment</option>
+                <option value="Townhouse">Townhouse</option>
+                <option value="Villa">Villa</option>
+                <option value="Studio">Studio</option>
+                <option value="Independent House">Independent House</option>
+                <option value="Farmhouse">Farmhouse</option>
+            </select>
+
+            <label for="Furnishing_Status">Furnishing_Status</label>
+            <select id="Furnishing_Status" name="Furnishing_Status" required>
+                <option value="">Select Furnishing Status</option>
+                <option value="Fully-Furnished">Fully-Furnished</option>
+                <option value="Unfurnished">Unfurnished</option>
+                <option value="Semi-Furnished">Semi-Furnished</option>
+            </select>
+
+            <label for="Property_Size_SQFT">Property_Size_SQFT</label>
+            <input type="number" id="Property_Size_SQFT" name="Property_Size_SQFT" placeholder="Enter property size in sq. ft." required>
+
+            <label for="Previous_Owners">Previous_owners (Min=0,Max=6)</label>
+            <input type="number" id="Previous_Owners" name="Previous_Owners" min="0" max="6" placeholder="Enter number of previous owners" required>
+
+            <label for="Rooms">Rooms</label>
+            <input type="number" name="Rooms" id="Rooms" min="1" max="8" placeholder="Enter total number of rooms" required>
+
+            <label for="Bathrooms">Bathrooms</label>
+            <input type="number" name="Bathrooms" id="Bathrooms" min="1" max="8" placeholder="Enter total number of bathrooms" required>
+
+            <label for="Garden">Garden (Yes:1, No:0)</label>
+            <input type="number" name="Garden" id="Garden" min="0" max="1" placeholder="1 = Yes, 0 = No">
+
+            <label for="Monthly_Expenses"> Monthly_Expenses</label>
+            <input type="number" name="Monthly_Expenses" id="Monthly_Expenses" placeholder="Enter monthly expenses" required>
+
+            <label for="Neighbourhood_Rating">Neighbourhood_Rating</label>
+            <input type="number" name="Neighbourhood_Rating" id="Neighbourhood_Rating" placeholder="Rate neighbourhood 1 (worst) - 10 (best)" min="1" max="10" required>
+
+            <button type="submit" class="predict-bt">Predict</button>
+        </form>
+
+        <form action="/train" method="get">
+            <button type="submit" class="train-bt">Train_Model</button>
+        </form>
+
+        {% if context %}
+            <div class="result">
+                <h2>result: {{context}}</h2>
+            </div>
+        {% endif %}
+
+    </div>
+
+
+</body>
+
+</html>
