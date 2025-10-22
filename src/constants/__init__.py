@@ -57,7 +57,7 @@ MODEL_PUSHER_S3_KEY:str="model_registry"
 
 # app
 APP_HOST="0.0.0.0"
-APP_PORT=5000
+APP_PORT = int(os.environ.get("PORT", 5000))
 
 
 
