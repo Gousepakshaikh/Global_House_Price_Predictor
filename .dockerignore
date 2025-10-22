@@ -1,0 +1,14 @@
+Artifact
+myenv
+.gitignore
+logs
+template.py
+demo.py
+README.md
+LICENSE
+src.egg.-info
+notebooks
+.dvc
+.vscode
+.dvcignore
+notebook.dvc

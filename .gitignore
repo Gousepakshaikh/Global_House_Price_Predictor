@@ -1,5 +1,3 @@
-# Logs
-logs/
 
 # Demo/test scripts
 demo.py
@@ -19,4 +17,3 @@ __pycache__/
 # VSCode settings (optional but recommended)
 .vscode/
 
-Artifact/
